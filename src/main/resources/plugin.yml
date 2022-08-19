@@ -1,0 +1,8 @@
+main: me.noobsters.minigame.UHC
+name: UHC-1.16
+version: ${version}
+description: "Redundant and optimized UHC minigame plugin."
+api-version: "1.16"
+api: "1.16"
+authors: [InfinityZ, AleIV]
+softdepend: [Kern, Chunky, Vault, Citizens]
