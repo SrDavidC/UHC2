@@ -14,6 +14,7 @@ import me.noobsters.minigame.gamemodes.types.UHCMeetup;
 import me.noobsters.minigame.scoreboard.IngameScoreboard;
 import me.noobsters.minigame.tasks.AntiFallDamage;
 import me.noobsters.minigame.tasks.GameLoop;
+import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -136,7 +137,7 @@ public class GlobalListener implements Listener {
 
     @EventHandler
     public void onTeleportCompleted(TeleportationCompletedEvent e) {
-        Bukkit.broadcastMessage(GameLoop.SHAMROCK_GREEN + "Starting soon...");
+        Bukkit.getServer().broadcast(Component.text((GameLoop.SHAMROCK_GREEN + "Starting soon...")));
         instance.getScoreboardManager().getUpdateTask().cancel();
 
         Bukkit.getScheduler().runTaskLater(instance, () -> {
@@ -181,10 +182,10 @@ public class GlobalListener implements Listener {
             bar.addPlayer(players);
         });
 
-        if(instance.getGame().getGameInfo() == GameInfo.OFFICIAL) 
-            Bukkit.broadcastMessage(ChatColor.of("#c76905") + "Official Competitive UHC game has started.");
-        else 
-            Bukkit.broadcastMessage(GameLoop.SHAMROCK_GREEN + "UHC has started!");
+        if(instance.getGame().getGameInfo() == GameInfo.OFFICIAL)
+            Bukkit.getServer().broadcast(Component.text(ChatColor.of("#c76905") + "Official Competitive UHC game has started."));
+        else
+            Bukkit.getServer().broadcast(Component.text(GameLoop.SHAMROCK_GREEN + "UHC has started!"));
 
         showRules();
 

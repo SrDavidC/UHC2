@@ -29,7 +29,9 @@ import org.bukkit.GameRule;
 import org.bukkit.NamespacedKey;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitWorker;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -66,6 +68,8 @@ public class UHC extends JavaPlugin {
     /* Statics */
     private static @Getter UHC instance;
     private static @Setter TaskChainFactory taskChainFactory;
+    private @Getter org.bukkit.scoreboard.ScoreboardManager SCmanager;
+    private @Getter Scoreboard teamBoards;
 
     /* Condor Pre Boot-up code starts */
     //private @Getter CondorConfig condorDataConfig;
@@ -228,6 +232,10 @@ public class UHC extends JavaPlugin {
         gamemodeManager = new GamemodeManager(this);
         chatManager = new ChatManager(this);
         borderManager = new BorderManager(this);
+        SCmanager = Bukkit.getScoreboardManager();
+
+        teamBoards = SCmanager.getNewScoreboard();
+
         //guiManager = new GuiManager(this);
 
         portalListeners = new PortalListeners(this);
@@ -238,7 +246,7 @@ public class UHC extends JavaPlugin {
         runStartUp();
 
         /* In case the server is already running and it is a reload */
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldload");
+        //Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldload");
 
         /* Lobby stage has been reached */
         gameStage = Stage.LOBBY;
@@ -391,4 +399,8 @@ public class UHC extends JavaPlugin {
         return taskChainFactory.newSharedChain(name);
     }
 
+    @EventHandler
+    public void onJoins(PlayerJoinEvent e){
+        e.getPlayer().setScoreboard(teamBoards);
+    }
 }

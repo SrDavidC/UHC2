@@ -1,6 +1,5 @@
 package me.noobsters.minigame.gamemodes.types;
 
-import gnu.trove.map.hash.THashMap;
 import me.noobsters.minigame.UHC;
 import me.noobsters.minigame.gamemodes.IGamemode;
 import net.md_5.bungee.api.ChatColor;
@@ -21,11 +20,12 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 public class NoClean extends IGamemode implements Listener {
     private UHC instance;
-    private THashMap<UUID, Long> noCleanTimeMap;
+    private HashMap<UUID, Long> noCleanTimeMap;
     private BukkitTask task;
     private static String NO_CLEAN_OBTAINED = ChatColor.RED
             + "You will be invincible for the next 20 seconds.";
@@ -46,7 +46,7 @@ public class NoClean extends IGamemode implements Listener {
         if (isEnabled()) {
             return false;
         }
-        noCleanTimeMap = new THashMap<>();
+        noCleanTimeMap = new HashMap<>();
         task = Bukkit.getScheduler().runTaskTimerAsynchronously(instance, () -> {
             var iterator = noCleanTimeMap.entrySet().iterator();
             while (iterator.hasNext()) {
@@ -106,7 +106,7 @@ public class NoClean extends IGamemode implements Listener {
         if(e.getInventory().getType().toString().equals("CHEST")){
             var cleaner = (Player) e.getPlayer();
             var playerProtected = cleaner.getLocation().getNearbyPlayers(5).stream().filter(p -> !isTeamMate(cleaner, p)
-            && p.getUniqueId() != cleaner.getUniqueId() && p.getGameMode() == GameMode.SURVIVAL && noCleanTimeMap.contains(p.getUniqueId())).findFirst();
+            && p.getUniqueId() != cleaner.getUniqueId() && p.getGameMode() == GameMode.SURVIVAL && noCleanTimeMap.containsValue(p.getUniqueId())).findFirst();
             if(playerProtected.isPresent()){
                 cleaner.sendMessage(String.format(NO_CLEAN_SAFELOOT, playerProtected.get().getName().toString()));
                 e.setCancelled(true);
@@ -136,7 +136,7 @@ public class NoClean extends IGamemode implements Listener {
                 damager.sendMessage(String.format(NO_CLEAN_PLAYER_PROTECTED, e.getEntity().getName(),
                         (time - System.currentTimeMillis()) / 1000.0D));
                 e.setCancelled(true);
-            }else if(damager != null && noCleanTimeMap.contains(damager.getUniqueId())){                
+            }else if(damager != null && noCleanTimeMap.containsValue((damager.getUniqueId()))){
                 noCleanTimeMap.remove(damager.getUniqueId());
                 damager.sendMessage(NO_CLEAN_LOST);
                 damager.sendActionBar(NO_CLEAN_OVER_ACTIONBAR);
@@ -169,7 +169,7 @@ public class NoClean extends IGamemode implements Listener {
         if(e.getEntity() instanceof Player){
             var cleaner = (Player) e.getEntity();
             var playerProtected = cleaner.getLocation().getNearbyPlayers(5).stream().filter(p -> !isTeamMate(cleaner, p)
-            && p.getUniqueId() != cleaner.getUniqueId() && p.getGameMode() == GameMode.SURVIVAL && noCleanTimeMap.contains(p.getUniqueId())).findFirst();
+            && p.getUniqueId() != cleaner.getUniqueId() && p.getGameMode() == GameMode.SURVIVAL && noCleanTimeMap.containsValue(p.getUniqueId())).findFirst();
             if(playerProtected.isPresent()){
                 cleaner.sendActionBar(String.format(NO_CLEAN_SAFELOOT, playerProtected.get().getName().toString()));
                 e.setCancelled(true);
@@ -186,7 +186,7 @@ public class NoClean extends IGamemode implements Listener {
         final var item = cleaner.getInventory().getItemInMainHand().getType();
 
             var playerProtected = cleaner.getLocation().getNearbyPlayers(5).stream().filter(p -> !isTeamMate(cleaner, p)
-            && p.getUniqueId() != cleaner.getUniqueId() && p.getGameMode() == GameMode.SURVIVAL && noCleanTimeMap.contains(p.getUniqueId())).findFirst();
+            && p.getUniqueId() != cleaner.getUniqueId() && p.getGameMode() == GameMode.SURVIVAL && noCleanTimeMap.containsValue(p.getUniqueId())).findFirst();
             if(playerProtected.isPresent()){
 
                 if (item.equals(Material.FLINT_AND_STEEL) || item.equals(Material.LAVA_BUCKET)

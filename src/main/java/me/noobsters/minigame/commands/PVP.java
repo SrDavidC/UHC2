@@ -5,6 +5,7 @@ import co.aikar.commands.annotation.*;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import me.noobsters.minigame.UHC;
+import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -24,7 +25,7 @@ public class PVP extends BaseCommand {
             instance.getGame().setPvp(!instance.getGame().isPvp());
         }
 
-        Bukkit.broadcastMessage(ChatColor.YELLOW + "PvP has been set to " + instance.getGame().isPvp());
+        Bukkit.getServer().broadcast  (Component.text((ChatColor.YELLOW + "PvP has been set to " + instance.getGame().isPvp())));
     }
 
 }

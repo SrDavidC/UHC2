@@ -36,8 +36,7 @@ public class HelpopCommand extends BaseCommand {
 
         player.sendMessage(sunflowerYellow + "Your message has been sent!");
 
-        Bukkit.broadcast(sunflowerYellow + "[Helpop] " + ChatColor.GRAY + player.getName() + ": " + message,
-                "helpop.hear");
+        Bukkit.broadcastMessage(sunflowerYellow + "[Helpop] " + ChatColor.GRAY + player.getName() + ": " + message);
         Bukkit.getOnlinePlayers().forEach(p ->{
             if(p.hasPermission("helpop.hear")){
                 p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_GUITAR, 1, 1);

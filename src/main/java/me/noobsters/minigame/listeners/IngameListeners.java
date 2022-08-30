@@ -379,7 +379,8 @@ public class IngameListeners implements Listener {
 
         } else {
             e.setLines(new String[] {
-                    Game.getScoreColors() + "Time: " + ChatColor.WHITE + timeConvert(instance.getGame().getGameTime()),
+                    Game.getScoreColors() + "Time: " + ChatColor.WHITE + timeConvert(instance.getGame().getGameTime()) ,
+                    //Game.getScoreColors() + "Time: " + ChatColor.WHITE + timeConvert(instance.getGame().getGameTime()),
                     "",
                     Game.getScoreColors() + "Your Kills: " + ChatColor.WHITE
                             + (uhcPlayer != null ? uhcPlayer.getKills() : 0),

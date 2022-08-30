@@ -17,6 +17,7 @@ import me.noobsters.minigame.game.border.FortniteBorder;
 import me.noobsters.minigame.players.PositionObject;
 import me.noobsters.minigame.players.UHCPlayer;
 import me.noobsters.minigame.scoreboard.objects.FastBoard;
+import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ClickEvent.Action;
@@ -117,7 +118,8 @@ public class UHCCommand extends BaseCommand {
 
         target.setGameMode(GameMode.SURVIVAL);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + ChatColor.of("#7ab83c") + target.getName().toString() + " has been scattered into the world.", permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + ChatColor.of("#7ab83c") +
+                target.getName().toString() + " has been scattered into the world.");
     }
 
     @CommandPermission("staff.perm")
@@ -158,10 +160,10 @@ public class UHCCommand extends BaseCommand {
         var nameList = team != null
                 ? team.getOfflinePlayersStream().map(OfflinePlayer::getName).collect(Collectors.toList())
                 : Collections.singleton(sender.getName());
-        try {
+       try {
             FastBoard.removeTeam(sender);
             FastBoard.createTeam(nameList, sender, ChatColor.translateAlternateColorCodes('&', str), index);
-        } catch (ReflectiveOperationException e) {
+       } catch (ReflectiveOperationException e) {
             e.printStackTrace();
         }
     }
@@ -367,7 +369,8 @@ public class UHCCommand extends BaseCommand {
 
         instance.getGame().setAntiMining(bool);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Anti Mining has been set to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW +
+                "Anti Mining has been set to: " + bool);
     }
 
     @CommandPermission("admin.perm")
@@ -380,7 +383,8 @@ public class UHCCommand extends BaseCommand {
 
         instance.getGame().setCombatLog(bool);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "CombatLog has been set to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW +
+                "CombatLog has been set to: " + bool);
     }
 
     @CommandPermission("staff.perm")
@@ -397,7 +401,8 @@ public class UHCCommand extends BaseCommand {
             instance.getGame().setGameInfo(GameInfo.COMMUNITY);
         }
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.of("#c76905") + "Official UHC Competitive game has been set to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName +
+                ChatColor.of("#c76905") + "Official UHC Competitive game has been set to: " + bool);
     }
 
     @Subcommand("setHost")
@@ -405,7 +410,7 @@ public class UHCCommand extends BaseCommand {
     @CommandPermission("uhc.admin")
     public void changeHost(CommandSender sender, String newHost) {
         instance.getGame().setHostname(newHost);
-        Bukkit.broadcastMessage(ChatColor.GREEN + "New host: " + sender.getName());
+        Bukkit.getServer().broadcast  (Component.text((ChatColor.GREEN + "New host: " + sender.getName())));
 
     }
 
@@ -416,12 +421,10 @@ public class UHCCommand extends BaseCommand {
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
         if (instance.getGame().isAutoDestruction()) {
             instance.getGame().setAutoDestruction(false);
-            Bukkit.broadcast(senderName + ChatColor.YELLOW + "Auto destruction has been disabled.",
-            permissionDebug);
+            Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Auto destruction has been disabled.");
         } else {
             instance.getGame().setAutoDestruction(true);
-            Bukkit.broadcast(senderName + ChatColor.YELLOW + "Auto destruction has been enabled.",
-            permissionDebug);
+            Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Auto destruction has been enabled.");
         }
 
     }
@@ -430,7 +433,7 @@ public class UHCCommand extends BaseCommand {
     @CommandPermission("staff.perm")
     public void claimHost(CommandSender sender) {
         instance.getGame().setHostname(sender.getName());
-        Bukkit.broadcastMessage(ChatColor.GREEN + "New host: " + sender.getName());
+        Bukkit.getServer().broadcast  (Component.text((ChatColor.GREEN + "New host: " + sender.getName())));
     }
 
     @Data

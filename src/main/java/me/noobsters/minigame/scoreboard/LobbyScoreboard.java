@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 public class LobbyScoreboard extends IScoreboard {
 
     public LobbyScoreboard(Player player) {
+
         super(player);
         this.updateTitle(Game.getScoreboardTitle());
         this.updateLines(Game.getScoreColors() + "Players: " + ChatColor.WHITE + Bukkit.getOnlinePlayers().size(),

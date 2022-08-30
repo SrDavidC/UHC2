@@ -3,7 +3,6 @@ package me.noobsters.minigame.gamemodes.types;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.Optional;
 import co.aikar.commands.annotation.*;
-import gnu.trove.set.hash.THashSet;
 import lombok.Getter;
 import me.noobsters.minigame.UHC;
 import me.noobsters.minigame.events.TeamWinEvent;
@@ -11,7 +10,6 @@ import me.noobsters.minigame.events.UHCPlayerDequalificationEvent;
 import me.noobsters.minigame.gamemodes.IGamemode;
 import me.noobsters.minigame.listeners.IngameListeners;
 import me.noobsters.minigame.players.UHCPlayer;
-import me.noobsters.minigame.scoreboard.objects.FastBoard;
 import me.noobsters.minigame.teams.objects.Team;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -37,8 +35,8 @@ public class Moles extends IGamemode implements Listener {
      */
 
     private UHC instance;
-    private @Getter THashSet<Team> molesSet = new THashSet<>();
-    private @Getter THashSet<UUID> molesPredefined = new THashSet<>();
+    private @Getter HashSet<Team> molesSet = new HashSet<>();
+    private @Getter HashSet<UUID> molesPredefined = new HashSet<>();
     private final Random r = new Random();
     private final MolesCommand command;
     private boolean announceMoles = true;
@@ -124,16 +122,18 @@ public class Moles extends IGamemode implements Listener {
     }
 
     public void giveMoleTag(Player player, Team t) {
-        try {
-            FastBoard.createTeam(player,
-                    t.getOfflinePlayersStream()
-                            .filter(member -> player.getUniqueId().getMostSignificantBits() != member.getUniqueId()
-                                    .getMostSignificantBits())
-                            .map(OfflinePlayer::getName).collect(Collectors.toList()),
-                    "001Mole", t.getTeamPrefix(), 12);
-        } catch (ReflectiveOperationException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            FastBoard.createTeam(player,
+//                    t.getOfflinePlayersStream()
+//                            .filter(member -> player.getUniqueId().getMostSignificantBits() != member.getUniqueId()
+//                                    .getMostSignificantBits())
+//                            .map(OfflinePlayer::getName).collect(Collectors.toList()),
+//                    "001Mole", t.getTeamPrefix(), 12);
+//        } catch (ReflectiveOperationException e) {
+//            e.printStackTrace();
+//        } catch (Throwable throwable) {
+//            throwable.printStackTrace();
+//        }
     }
 
     @EventHandler
@@ -187,11 +187,11 @@ public class Moles extends IGamemode implements Listener {
 
             Bukkit.broadcastMessage(ChatColor.RED + "The Moles have been choosen.");
             Bukkit.getOnlinePlayers().forEach(players -> {
-                try {
-                    FastBoard.removeTeam(players, "001Mole");
-                } catch (ReflectiveOperationException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    FastBoard.removeTeam(players, "001Mole");
+//                } catch (ReflectiveOperationException e) {
+//                    e.printStackTrace();
+//                }
                 players.playSound(players.getLocation(), Sound.ENTITY_RAVAGER_CELEBRATE, 1, 1);
                 var mole = false;
                 for (UUID uuid : molesUUID) {
@@ -310,11 +310,11 @@ public class Moles extends IGamemode implements Listener {
             }
             Bukkit.getOnlinePlayers().forEach(all -> {
 
-                try {
-                    FastBoard.removeTeam(all, "001Mole");
-                } catch (ReflectiveOperationException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    FastBoard.removeTeam(all, "001Mole");
+//                } catch (ReflectiveOperationException e) {
+//                    e.printStackTrace();
+//                }
                 g(all);
             });
 

@@ -1,6 +1,5 @@
 package me.noobsters.minigame.gamemodes.types;
 
-import gnu.trove.map.hash.THashMap;
 import lombok.Getter;
 import me.noobsters.minigame.UHC;
 import me.noobsters.minigame.gamemodes.IGamemode;
@@ -26,13 +25,15 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * TiempoBomba
  */
 public class TiempoBomba extends IGamemode implements Listener {
     private UHC instance;
-    private @Getter THashMap<TimeBombData, Long> hologramChestMap = new THashMap<>();
+    private @Getter
+    HashMap<TimeBombData, Long> hologramChestMap = new HashMap<>();
     private @Getter ArrayList<java.awt.Color> colors = new ArrayList<>();
     private BukkitTask task;
 

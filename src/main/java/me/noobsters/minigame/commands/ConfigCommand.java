@@ -6,14 +6,17 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import me.noobsters.minigame.UHC;
 import me.noobsters.minigame.events.NetherDisabledEvent;
+import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Team;
 
 import java.text.DecimalFormat;
+
 
 /**
  * Config COMMAND
@@ -22,7 +25,7 @@ import java.text.DecimalFormat;
 @CommandAlias("config|c")
 public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
     private @NonNull UHC instance;
-    private String permissionDebug = "uhc.configchanges.see";
+    final private String permissionDebug = "uhc.configchanges.see";
     DecimalFormat numberFormat = new DecimalFormat("#0.0"); 
 
     @Default
@@ -92,7 +95,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
 
         instance.getGame().setTears(bool);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Tears has been set to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Tears has been set to: " + bool);
     }
 
     @CommandPermission("uhc.config.cmd")
@@ -107,7 +110,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
         if(bool == true && !instance.getGame().isDeathMatchDamage()) instance.getGame().setDeathMatchDamage(true);
         if(bool == false && instance.getGame().isDeathMatchDamage()) instance.getGame().setDeathMatchDamage(false);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "DeathMatch has been set to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "DeathMatch has been set to: " + bool);
     }
 
     @CommandPermission("uhc.config.cmd")
@@ -123,7 +126,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
         game.setWhitelistEnabled(bool);
 
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Game changed to: " + (bool ? "Private" : "Public"), permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Game changed to: " + (bool ? "Private" : "Public"));
     }
 
     @CommandPermission("uhc.config.cmd")
@@ -132,7 +135,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
     public void changeMaxDisconectTime(CommandSender sender, Integer newMaxDisconnectTime) {
         instance.getGame().setMaxDisconnectTime(newMaxDisconnectTime*60);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Max Disconnect time changed to: " + newMaxDisconnectTime + " minutes.", permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Max Disconnect time changed to: " + newMaxDisconnectTime + " minutes.");
     }
 
     @CommandPermission("uhc.config.cmd")
@@ -145,7 +148,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
 
         instance.getGame().setBedsNerf(bool);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Beds Nerf changed to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Beds Nerf changed to: " + bool);
     }
 
     @CommandPermission("uhc.config.cmd")
@@ -163,7 +166,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
         });
         
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Show Advancements changed to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Show Advancements changed to: " + bool);
     }
 
     @CommandPermission("uhc.config.cmd")
@@ -176,7 +179,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
 
         instance.getGame().setPotions(bool);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Potions has been set to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Potions has been set to: " + bool);
     }
 
     @CommandPermission("uhc.config.cmd")
@@ -189,7 +192,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
 
         instance.getGame().setStrengthNerf(bool);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Strength Nerf has been set to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Strength Nerf has been set to: " + bool);
     }
 
     @CommandPermission("uhc.config.cmd")
@@ -199,8 +202,8 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
         var from = numberFormat.format(instance.getGame().getAppleRate());
         var to = numberFormat.format(rate);
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + 
-                "Applerate has been changed from " + from + "% to " + to + "%", permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW +
+                "Applerate has been changed from " + from + "% to " + to + "%");
         instance.getGame().setAppleRate(rate);
     }
 
@@ -211,8 +214,8 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
         var from = numberFormat.format(instance.getGame().getFlintRate());
         var to = numberFormat.format(rate);
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + 
-                "Flint Rate has been changed from " + from + "% to " + to + "%", permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW +
+                "Flint Rate has been changed from " + from + "% to " + to + "%");
         instance.getGame().setFlintRate(rate);
     }
 
@@ -222,7 +225,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
     public void changeSlots(CommandSender sender, Integer newSlots) {
         instance.getGame().setUhcSlots(newSlots);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Slots set to: " + newSlots, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Slots set to: " + newSlots);
     }
     
     @CommandPermission("uhc.config.cmd")
@@ -235,7 +238,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
 
         instance.getGame().setBeds(bool);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Beds has been set to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Beds has been set to: " + bool);
     }
 
     @CommandPermission("uhc.config.cmd")
@@ -248,7 +251,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
 
         instance.getGame().setTrident(bool);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Trident 100% drop has been set to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Trident 100% drop has been set to: " + bool);
     }
 
     @CommandPermission("uhc.config.cmd")
@@ -261,7 +264,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
 
         instance.getGame().setPotionsTier(bool);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Potions Tier II has been set to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Potions Tier II has been set to: " + bool);
     }
 
     @CommandPermission("uhc.config.cmd")
@@ -274,7 +277,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
 
         instance.getGame().setCobweb(bool);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "CobWebs has been set to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "CobWebs has been set to: " + bool);
     }
 
     @CommandPermission("uhc.config.cmd")
@@ -287,7 +290,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
 
         instance.getGame().setStrength(bool);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Strength has been set to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Strength has been set to: " + bool);
     }
 
     @CommandPermission("uhc.config.cmd")
@@ -300,7 +303,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
 
         instance.getGame().setHorses(bool);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Horses has been set to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Horses has been set to: " + bool);
     }
 
     @CommandPermission("uhc.config.cmd")
@@ -313,7 +316,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
 
         instance.getGame().setItemsBurn(bool);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Items burn has been set to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Items burn has been set to: " + bool);
     }
 
     @CommandPermission("uhc.config.cmd")
@@ -326,8 +329,23 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
 
         instance.getGame().setTrades(bool);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Trades has been set to: " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Trades has been set to: " + bool);
     }
 
-
+    @CommandPermission("uhc.config.cmd")
+    @Subcommand("tiempillo")
+    @CommandAlias("tiempillo")
+    public void tiempillo(CommandSender sender) {
+        Bukkit.getServer().broadcast(Component.text("GameTime: " + instance.getGame().getGameTime()
+        + "//\nGameStart:  " + instance.getGame().getStartTime()));
+    }
+    @CommandPermission("uhc.config.cmd")
+    @Subcommand("teamcillos")
+    @CommandAlias("teamcillos")
+    public void teamcillos(CommandSender sender) {
+        System.out.println(instance.getTeamBoards().getTeams().size());
+        for (Team iterator: instance.getTeamBoards().getTeams()) {
+            System.out.println("Entry: " + iterator.getName());
+        }
+    }
 }

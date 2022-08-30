@@ -6,3 +6,4 @@ api-version: "1.16"
 api: "1.16"
 authors: [InfinityZ, AleIV]
 softdepend: [Kern, Chunky, Vault, Citizens]
+load: POSTWORLD

@@ -5,7 +5,9 @@ import me.noobsters.minigame.UHC;
 import me.noobsters.minigame.game.Game;
 import me.noobsters.minigame.scoreboard.IScoreboard;
 import me.noobsters.minigame.scoreboard.LobbyScoreboard;
-import org.bukkit.*;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.Statistic;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -24,9 +26,9 @@ public class LobbyListeners implements Listener {
 
     public LobbyListeners(UHC instance) {
     this.instance = instance;
-        final var world = Bukkit.getWorld("lobby");
-        world.setSpawnLocation(new Location(world, 0, 66, 0, 90, 0));
-        Game.setLobbySpawn(world.getSpawnLocation());
+        //final var world = Bukkit.getWorld("lobby");
+       // world.setSpawnLocation(new Location(world, 0, 66, 0, 90, 0));
+       // Game.setLobbySpawn(world.getSpawnLocation());
     }
 
     /*
@@ -97,10 +99,11 @@ public class LobbyListeners implements Listener {
      */
     @EventHandler
     public void onJoinEvent(PlayerJoinEvent e) {
+        System.out.println("FIRST READ");
         if (instance.getScoreboardManager().findScoreboard(e.getPlayer().getUniqueId()) != null) {
             return;
         }
-
+        System.out.println("NOT NULL READ");
         final IScoreboard sb = new LobbyScoreboard(e.getPlayer());
         instance.getScoreboardManager().getFastboardMap().put(e.getPlayer().getUniqueId().toString(), sb);
 

@@ -10,6 +10,7 @@ import me.noobsters.minigame.enums.Stage;
 import me.noobsters.minigame.events.ConfigChangeEvent;
 import me.noobsters.minigame.gamemodes.types.UHCMeetup;
 import me.noobsters.minigame.gamemodes.types.UHCRun;
+import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -156,7 +157,7 @@ public class Game {
                     () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop"), 2);
 
         } catch (Exception e) {
-            Bukkit.broadcastMessage("Error while autodeleting instance: " + e.getMessage());
+            Bukkit.getServer().broadcast  (Component.text(("Error while autodeleting instance: " + e.getMessage());
             // TODO: handle exception
         }
 
@@ -172,12 +173,11 @@ public class Game {
         if (!isAutoDestruction())
             return;
 
-        Bukkit.broadcast(ChatColor.GRAY + "[UHC] This game will be self destructed in " + delay + " seconds.",
-                "uhc.destroy.self");
+        Bukkit.getServer().broadcast  (Component.text((ChatColor.GRAY + "[UHC] This game will be self destructed in " + delay + " seconds.")));
 
         Bukkit.getScheduler().runTaskLater(instance, () -> {
             if (!instance.getGame().isAutoDestruction()) {
-                Bukkit.broadcast(ChatColor.GRAY + "[UHC] Self-destruction was cancelled.", "uhc.destroy.self");
+                Bukkit.getServer().broadcast  (Component.text((ChatColor.GRAY + "[UHC] Self-destruction was cancelled.")));
                 return;
             }
 

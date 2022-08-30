@@ -30,7 +30,7 @@ public class Whitelist extends BaseCommand {
     public void enableDisable(CommandSender sender, Boolean bool) {
         instance.getGame().setWhitelistEnabled(bool);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.AQUA + "Whitelist " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.AQUA + "Whitelist " + bool);
 
     }
 
@@ -88,7 +88,8 @@ public class Whitelist extends BaseCommand {
         }else{
             whitelist.remove(target);
             var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-            Bukkit.broadcast(senderName + ChatColor.AQUA + target + " removed from the whitelist.", permissionDebug);
+            Bukkit.broadcastMessage(senderName + ChatColor.AQUA + target
+                    + " removed from the whitelist.");
         }
 
     }
@@ -98,7 +99,7 @@ public class Whitelist extends BaseCommand {
         var whitelist = instance.getGame().getWhitelist();
         whitelist.clear();
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.AQUA + "Whitelist cleared.", permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.AQUA + "Whitelist cleared.");
         
     }
 
@@ -111,7 +112,8 @@ public class Whitelist extends BaseCommand {
             whitelist.put(name, uuid);
         });
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.AQUA + "All players added to the whitelist.", permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.AQUA +
+                "All players added to the whitelist.");
         
     }
 

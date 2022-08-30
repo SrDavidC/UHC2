@@ -2,7 +2,6 @@ package me.noobsters.minigame.portals;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
-import gnu.trove.map.hash.THashMap;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import me.noobsters.minigame.UHC;
@@ -30,7 +29,7 @@ import java.util.UUID;
 public class PortalListeners extends BaseCommand implements Listener {
 
     private UHC instance;
-    private THashMap<UUID, Long> portalProtectionMap = new THashMap<>();
+    private HashMap<UUID, Long> portalProtectionMap = new HashMap<>();
     private static String PORTAL_PROT_OBTAINED = ChatColor.RED + "You have acquired 20 seconds of portal protection.";
     private static String PORTAL_PROT_PLAYER_PROTECTED = ChatColor.RED + "You can't damage %s for the next %.1f" + "s";
     private static String PORTAL_PROT_LOST = ChatColor.RED + "You have lost your portal protection.";
@@ -75,7 +74,7 @@ public class PortalListeners extends BaseCommand implements Listener {
                 damager.sendMessage(String.format(PORTAL_PROT_PLAYER_PROTECTED, e.getEntity().getName(),
                         (time - System.currentTimeMillis()) / 1000.0D));
                 e.setCancelled(true);
-            } else if (damager != null && portalProtectionMap.contains(damager.getUniqueId())) {
+            } else if (damager != null && portalProtectionMap.containsValue(damager.getUniqueId())) {
                 portalProtectionMap.remove(damager.getUniqueId());
                 damager.sendMessage(PORTAL_PROT_LOST);
                 damager.sendActionBar(PORTAL_PROT_OVER_ACTIONBAR);

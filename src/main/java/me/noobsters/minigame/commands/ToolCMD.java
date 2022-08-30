@@ -85,8 +85,8 @@ public @RequiredArgsConstructor class ToolCMD extends BaseCommand {
         UHCPlayer uhcPlayer = instance.getPlayerManager().getPlayer(target.getUniqueId());
         uhcPlayer.setSpecInfo(!uhcPlayer.isSpecInfo());
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.GREEN + target.getName() + "'s SpecInfo has been set to "
-                + uhcPlayer.isSpecInfo(), "host.info");
+        Bukkit.broadcastMessage(senderName + ChatColor.GREEN + target.getName() + "'s SpecInfo has been set to "
+                + uhcPlayer.isSpecInfo());
 
     }
 
@@ -106,10 +106,9 @@ public @RequiredArgsConstructor class ToolCMD extends BaseCommand {
     public void onToggleSpec(Player sender) {
         toggleGm(sender);
         var senderName = ChatColor.GRAY + "[" + sender.getName() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + ChatColor.GRAY
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + ChatColor.GRAY
                 + (sender.getGameMode() == GameMode.SPECTATOR ? "Temporal Spectator Enabled."
-                        : "Temporal Spectator Disabled."),
-                permissionDebug);
+                        : "Temporal Spectator Disabled."));
 
     }
 
@@ -187,8 +186,8 @@ public @RequiredArgsConstructor class ToolCMD extends BaseCommand {
     public void maxHealth(CommandSender sender, @Flags("other") Player target, Float value) {
         target.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(value);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + ChatColor.of("#7ab83c") + target.getName().toString()
-                + " changed max health to " + value, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + ChatColor.of("#7ab83c") + target.getName().toString()
+                + " changed max health to " + value);
     }
 
     @CommandPermission("admin.perm")

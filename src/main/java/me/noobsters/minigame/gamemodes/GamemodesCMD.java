@@ -5,6 +5,7 @@ import co.aikar.commands.annotation.*;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import me.noobsters.minigame.UHC;
+import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -43,16 +44,17 @@ public class GamemodesCMD extends BaseCommand {
                 if(!gamemode.callEnable()){
                     sender.sendMessage(ChatColor.RED + "Couldn't enable " + gamemode.getName() + ".");
                 }else{
-                    Bukkit.broadcast(
-                        senderName + ChatColor.YELLOW + "Scenario " + gamemode.getName() + " has been enabled.", permissionDebug);
+                    Bukkit.getServer().broadcast  (Component.text((
+                        senderName + ChatColor.YELLOW + "Scenario " + gamemode.getName() + " has been enabled.")));
                 }
 
             } else {
                 if(!gamemode.callDisable()){
                     sender.sendMessage(ChatColor.RED + "Couldn't disable " + gamemode.getName() + ".");
                 }else{
-                    Bukkit.broadcast(
-                        senderName + ChatColor.YELLOW + "Scenario " + gamemode.getName() + " has been disabled.", permissionDebug);
+
+                    Bukkit.getServer().broadcast  (Component.text(
+                            senderName + ChatColor.YELLOW + "Scenario " + gamemode.getName() + " has been disabled."));
                 }
 
             }

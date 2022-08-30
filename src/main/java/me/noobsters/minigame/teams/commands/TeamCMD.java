@@ -35,6 +35,7 @@ public class TeamCMD extends BaseCommand {
             return team;
         }
         // At this point, team can only be null. Create a new one.
+
         team = new Team(player.getUniqueId());
         // If the displayname isn't null, then set it.
         if (teamName != null && teamName.length() > 0) {

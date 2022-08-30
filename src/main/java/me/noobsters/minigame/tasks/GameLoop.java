@@ -1,6 +1,5 @@
 package me.noobsters.minigame.tasks;
 
-import gnu.trove.map.hash.THashMap;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import me.noobsters.minigame.UHC;
@@ -16,6 +15,7 @@ import me.noobsters.minigame.gamemodes.types.GoToHell;
 import me.noobsters.minigame.gamemodes.types.UHCRun;
 import me.noobsters.minigame.players.UHCPlayer;
 import net.citizensnpcs.api.CitizensAPI;
+import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.*;
 import org.bukkit.World.Environment;
@@ -27,13 +27,14 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 @RequiredArgsConstructor
 public class GameLoop extends BukkitRunnable {
     private boolean borderShrink = false;
     private @NonNull UHC instance;
-    private THashMap<UUID, Long> borderTeleportMap = new THashMap<>();
+    private HashMap<UUID, Long> borderTeleportMap = new HashMap<>();
     public static final ChatColor HAVELOCK_BLUE = ChatColor.of("#4788d9");
     public static final ChatColor SHAMROCK_GREEN = ChatColor.of("#2be49c");
 
@@ -47,7 +48,7 @@ public class GameLoop extends BukkitRunnable {
         var diff = Math.min(new_time - previous_time, 5);
 
         while (diff > 1) {
-            Bukkit.broadcast(ChatColor.GRAY + "[UHC] Latency:" + diff + "s", "uhc.performance");
+            Bukkit.getServer().broadcast(Component.text((ChatColor.GRAY + "[UHC] Latency:" + diff + "s")));
             loop(diff);
             diff--;
         }
@@ -115,7 +116,7 @@ public class GameLoop extends BukkitRunnable {
             // AVISO 5MIN LEFT FOR FINAL HEAL
             Bukkit.getOnlinePlayers()
                     .forEach(all -> all.playSound(all.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 1));
-            Bukkit.broadcastMessage(HAVELOCK_BLUE + "5 minutes left for Final Heal.");
+            Bukkit.getServer().broadcast(Component.text(  HAVELOCK_BLUE + "5 minutes left for Final Heal."));
         }
         if (time == healTime) {
             // FINAL HEAL
@@ -126,14 +127,14 @@ public class GameLoop extends BukkitRunnable {
                     all.playSound(all.getLocation(), Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1, 1);
                 });
             });
-            Bukkit.broadcastMessage(SHAMROCK_GREEN + "Final heal!");
+            Bukkit.getServer().broadcast(Component.text(SHAMROCK_GREEN + "Final heal!"));
 
         }
         if (time == pvpStart - 300) {
             // AVISO 5 MINS LEFT FOR PVP
             Bukkit.getOnlinePlayers()
                     .forEach(players -> players.playSound(players.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 1));
-            Bukkit.broadcastMessage(HAVELOCK_BLUE + "PvP will be enabled in 5 minutes.");
+            Bukkit.getServer().broadcast(Component.text(HAVELOCK_BLUE + "PvP will be enabled in 5 minutes."));
 
         }
         if (time == pvpStart) {
@@ -169,13 +170,13 @@ public class GameLoop extends BukkitRunnable {
         }
         if (time == borderStart) {
             // BORDER TIME
-            Bukkit.broadcastMessage(
+            Bukkit.getServer().broadcast(Component.text(
                     HAVELOCK_BLUE + "The border has started to move to the center of the map in the next "
-                            + (game.getBorderCenterTime() / 60) + " minutes at speed of 1 block per second!");
+                            + (game.getBorderCenterTime() / 60) + " minutes at speed of 1 block per second!"));
 
             if (game.isNether()) {
-                Bukkit.broadcastMessage(SHAMROCK_GREEN
-                        + "Players in nether will be randomly teleported to the overworld once the border reaches 500 blocks.");
+                Bukkit.getServer().broadcast(Component.text(SHAMROCK_GREEN
+                        + "Players in nether will be randomly teleported to the overworld once the border reaches 500 blocks."));
             }
 
             Bukkit.getOnlinePlayers()
@@ -200,7 +201,7 @@ public class GameLoop extends BukkitRunnable {
                 return;
 
             instance.getGame().setDeathMatchDamage(true);
-            Bukkit.broadcastMessage(ChatColor.of("#d40c42") + "Death Match has started.");
+            Bukkit.getServer().broadcast(Component.text(ChatColor.of("#d40c42") + "Death Match has started."));
             Bukkit.getScheduler().runTask(instance, () -> Bukkit.getOnlinePlayers().forEach(players -> {
                 players.playSound(players.getLocation(), Sound.ENTITY_WITHER_DEATH, 1.0f, 0.5f);
                 if (players.getGameMode() == GameMode.SURVIVAL)

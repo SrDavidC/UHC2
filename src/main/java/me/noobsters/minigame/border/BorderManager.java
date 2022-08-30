@@ -7,7 +7,7 @@ import me.noobsters.minigame.UHC;
 @RequiredArgsConstructor
 public class BorderManager {
     private @NonNull UHC instance;/*
-    private THashMap<UUID, Double> mapOfBorders = new THashMap<>();
+    private HashMap<UUID, Double> mapOfBorders = new HashMap<>();
     private BukkitTask task = Bukkit.getScheduler().runTaskTimerAsynchronously(UHC.getInstance(), () -> {
         for (var world : Bukkit.getWorlds()) {
             mapOfBorders.put(world.getUID(), world.getWorldBorder().getSize());

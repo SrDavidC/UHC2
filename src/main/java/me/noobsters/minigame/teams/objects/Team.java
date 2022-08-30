@@ -28,10 +28,12 @@ public class Team {
     private @Getter @Setter UUID[] members;
     private @Getter String teamDisplayName;
     private @Getter @Setter int teamKills;
-    private @Getter @Setter String teamPrefix = "➤ ";
+    private @Getter @Setter String teamPrefix = ">";
     private @Getter @Setter int teamColorIndex = 10;
     private @Getter Inventory teamInventory;
     private static int teamNumber = 1;
+    private @Getter @Setter
+    org.bukkit.scoreboard.Team SCteam;
 
     public Team(UUID teamLeader) {
         this.teamID = UUID.randomUUID();
@@ -40,7 +42,10 @@ public class Team {
         this.teamDisplayName = "#" + teamNumber;
         this.teamColorIndex = localRandom.nextInt(13) + 1;
         teamNumber++;
+
         addMember(teamLeader);
+        //Bukkit.getScoreboardManager().getNewScoreboard().registerNewTeam("Team").addPlayer(Bukkit.getOfflinePlayer(teamLeader));
+
     }
 
     /**
@@ -148,21 +153,21 @@ public class Team {
     }
 
     public void removeDisplayToPlayer(Player player) {
-        try {
-            var ID = "1" + getIdentifier();
-            FastBoard.removeTeam(player, ID);
-        } catch (ReflectiveOperationException ex) {
-            ex.printStackTrace();
-        }
+//        try {
+//            var ID = "1" + getIdentifier();
+//            FastBoard.removeTeam(player, ID);
+//        } catch (ReflectiveOperationException ex) {
+//            ex.printStackTrace();
+//        }
     }
 
     public void removeDisplayToMember(Player player) {
-        try {
-            var ID = "0" + getIdentifier();
-            FastBoard.removeTeam(player, ID);
-        } catch (ReflectiveOperationException ex) {
-            ex.printStackTrace();
-        }
+        //try {
+            //var ID = "0" + getIdentifier();
+            //FastBoard.removeTeam(player, ID);
+       // } //catch (ReflectiveOperationException ex) {
+            //ex.printStackTrace();
+        //}
 
     }
 
@@ -192,8 +197,10 @@ public class Team {
             FastBoard.createTeam(player, members, ID, showPrefix ? "[" + getTeamDisplayName() + "] " : "",
                     getTeamColorIndex());
         } catch (ReflectiveOperationException ex) {
-            ex.printStackTrace();
-        }
+        ex.printStackTrace();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+       }
     }
 
     public void updateDisplayToMember(Player player, Collection<String> members) {
@@ -203,6 +210,8 @@ public class Team {
             FastBoard.createTeam(player, members, ID, getTeamPrefix(), getTeamColorIndex());
         } catch (ReflectiveOperationException ex) {
             ex.printStackTrace();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
         }
 
     }

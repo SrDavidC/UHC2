@@ -5,7 +5,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import me.noobsters.minigame.UHC;
 import me.noobsters.minigame.enums.Stage;
-import me.noobsters.minigame.scoreboard.objects.FastBoard;
 import me.noobsters.minigame.teams.events.*;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -16,6 +15,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.scoreboard.Scoreboard;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 @RequiredArgsConstructor
 public class TeamListeners implements Listener {
@@ -123,6 +127,7 @@ public class TeamListeners implements Listener {
         if (!e.isQuiet())
             team.sendTeamMessage(ChatColor.RED + "Team has been disbanded by "
                     + Bukkit.getOfflinePlayer(e.getTeam().getTeamLeader()).getName());
+        instance.getTeamBoards().getTeam(team.getTeamDisplayName()).unregister();
 
     }
 
@@ -132,7 +137,8 @@ public class TeamListeners implements Listener {
         // Notify the team that the player has joined
         if (!e.isQuiet())
             team.sendTeamMessage(SUSHI_GREEN + e.getPlayer().getName() + " has joined the team!");
-
+        instance.getTeamBoards().getTeam(team.getTeamDisplayName()).addEntry(e.getPlayer().getName());
+        updateScoreboardTeams(instance.getTeamBoards());
         team.updateDisplay(instance.getTeamManger().isBroacastColor(), instance.getTeamManger().isShowPrefix());
 
     }
@@ -141,14 +147,15 @@ public class TeamListeners implements Listener {
     public void onLeftTeam(PlayerLeftTeamEvent e) {
         var player = e.getPlayer();
         var team = e.getTeam();
-        try {
-            FastBoard.removeTeam(player);
-        } catch (ReflectiveOperationException ex) {
-            ex.printStackTrace();
-        }
+        //try {
+            instance.getTeamBoards().getTeam(team.getTeamDisplayName()).removeEntry(player.getName());
+            //FastBoard.removeTeam(player);
+        //} catch (ReflectiveOperationException ex) {
+          //  ex.printStackTrace();
+        //}
 
         team.updateDisplay(instance.getTeamManger().isBroacastColor(), instance.getTeamManger().isShowPrefix());
-
+        updateScoreboardTeams(instance.getTeamBoards());
         if (e instanceof PlayerKickedFromTeamEvent)
             return;
 
@@ -162,6 +169,7 @@ public class TeamListeners implements Listener {
         var player = e.getPlayer();
         if(instance.getTeamManger().isBroacastColor() && instance.getTeamManger().isTeams()){
             instance.getTeamManger().getTeamMap().values().forEach(team -> {
+                updateScoreboardTeams(instance.getTeamBoards());
                 final var members = team.getListOfMembers();
                 if (team.isMember(player.getUniqueId())) {
                     team.updateDisplayToMember(player, members);
@@ -171,9 +179,65 @@ public class TeamListeners implements Listener {
             });
         }
 
+
     }
 
+    @EventHandler
+    public void onCreateTeam(TeamCreatedEvent e) {
+//        Team noobstersTeam = e.getTeam();
+//        org.bukkit.scoreboard.@NotNull Team scoreboardTeam = instance.getTeamBoards().registerNewTeam(noobstersTeam.getTeamDisplayName());
+//        //scoreboardTeam.setPrefix(noobstersTeam.getTeamPrefix());
+//        //scoreboardTeam.setColor(randomColor());
+//        scoreboardTeam.color(NamedTextColor.RED);
+//        scoreboardTeam.prefix(Component.text("[TEST]"));
+//        scoreboardTeam.setAllowFriendlyFire(instance.getTeamManger().isFriendlyFire());
+//        scoreboardTeam.setCanSeeFriendlyInvisibles(true);
+//        System.out.println(instance.getTeamBoards().getTeams().size());
+      System.out.println("generated a scoreboard team");
 
+        //ScoreboardManager manager = Bukkit.getScoreboardManager();
+        //Scoreboard board = manager.getNewScoreboard();
+        Scoreboard board = instance.getTeamBoards();
+        org.bukkit.scoreboard.Team scoreboardTeam = board.registerNewTeam(e.getTeam().getTeamDisplayName());
+        scoreboardTeam.setPrefix(org.bukkit.ChatColor.DARK_RED +  e.getTeam().getTeamPrefix());
+        scoreboardTeam.setAllowFriendlyFire(instance.getTeamManger().isFriendlyFire());
+        scoreboardTeam.setCanSeeFriendlyInvisibles(true);
+        scoreboardTeam.setCanSeeFriendlyInvisibles(true);
+        scoreboardTeam.setSuffix(org.bukkit.ChatColor.GOLD + "[SUFFIXES]");
+        scoreboardTeam.setColor(randomColor());
+        scoreboardTeam.addEntry(e.getPlayer().getName());
+
+        e.getPlayer().setScoreboard(board);
+        updateScoreboardTeams(board);
+    }
+
+    public org.bukkit.ChatColor randomColor(){
+        Random random = new Random();
+        List<org.bukkit.ChatColor> colors = new ArrayList<org.bukkit.ChatColor>();
+        colors.add(org.bukkit.ChatColor.DARK_BLUE);
+        colors.add(org.bukkit.ChatColor.AQUA);
+        colors.add(org.bukkit.ChatColor.LIGHT_PURPLE);
+        colors.add(org.bukkit.ChatColor.YELLOW);
+        colors.add(org.bukkit.ChatColor.GOLD);
+        colors.add(org.bukkit.ChatColor.GREEN);
+        colors.add(org.bukkit.ChatColor.WHITE);
+        colors.add(org.bukkit.ChatColor.DARK_PURPLE);
+        colors.add(org.bukkit.ChatColor.BLACK);
+        colors.add(org.bukkit.ChatColor.DARK_AQUA);
+        colors.add(org.bukkit.ChatColor.DARK_RED);
+        colors.add(org.bukkit.ChatColor.GRAY);
+        colors.add(org.bukkit.ChatColor.DARK_GRAY);
+
+        System.out.println("generated a color");
+        return colors.get(random.nextInt(colors.size()));
+    }
+
+    public void updateScoreboardTeams(Scoreboard board){
+        for (Player p:Bukkit.getOnlinePlayers()
+             ) {
+            p.setScoreboard(board);
+        }
+    }
 
 
 }
