@@ -365,8 +365,7 @@ public class UHCMeetup extends IGamemode implements Listener {
                 "",
                 ChatColor.of("#2cc36b") + "Time: " + ChatColor.WHITE
                         + GameLoop.timeConvert(instance.getGame().getGameTime()),
-                ChatColor.of("#2cc36b") + "Border: " + ChatColor.WHITE + ((int) worldBorder.getSize() / 2), "",
-                ChatColor.WHITE + "noobsters.net");
+                ChatColor.of("#2cc36b") + "Border: " + ChatColor.WHITE + ((int) worldBorder.getSize() / 2), "");
 
     }
 

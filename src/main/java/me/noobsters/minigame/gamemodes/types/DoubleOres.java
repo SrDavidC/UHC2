@@ -72,14 +72,16 @@ public class DoubleOres extends IGamemode implements Listener{
     if (!instance.getGamemodeManager().isScenarioEnable(Cutclean.class)) {
         
         switch (block.getType()) {
+            case DEEPSLATE_IRON_ORE:
             case IRON_ORE: {
                 e.setDropItems(false);
-                dropCenter(new ItemStack(Material.IRON_ORE, 2), block.getLocation());
+                dropCenter(new ItemStack(Material.RAW_IRON, 2), block.getLocation());
                 break;
             }
+            case DEEPSLATE_GOLD_ORE:
             case GOLD_ORE: {
                 e.setDropItems(false);
-                dropCenter(new ItemStack(Material.GOLD_ORE, 2), block.getLocation());
+                dropCenter(new ItemStack(Material.RAW_GOLD, 2), block.getLocation());
                 break;
             }
             default:
@@ -100,6 +102,7 @@ public class DoubleOres extends IGamemode implements Listener{
                 dropCenter(new ItemStack(Material.ANCIENT_DEBRIS, 2), block.getLocation());
                 break;
             }
+            case DEEPSLATE_DIAMOND_ORE:
             case DIAMOND_ORE: {
                 final int fortune = fortuneMultiplier(itemInHand);
                 e.setDropItems(false);
@@ -108,6 +111,7 @@ public class DoubleOres extends IGamemode implements Listener{
                 
                 break;
             }
+            case DEEPSLATE_EMERALD_ORE:
             case EMERALD_ORE: {
                 final int fortune = fortuneMultiplier(itemInHand);
                 e.setDropItems(false);
@@ -122,6 +126,7 @@ public class DoubleOres extends IGamemode implements Listener{
                 e.setExpToDrop(quartzXp);
                 break;
             }
+            case DEEPSLATE_COAL_ORE:
             case COAL_ORE: {
                 final int fortune = fortuneMultiplier(itemInHand);
                 e.setDropItems(false);

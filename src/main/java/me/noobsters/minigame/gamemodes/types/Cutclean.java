@@ -61,6 +61,7 @@ public class Cutclean extends IGamemode implements Listener{
         if (itemInHand.getType() == Material.AIR || itemInHand.containsEnchantment(Enchantment.SILK_TOUCH))
             return;
         switch (block.getType()) {
+            case DEEPSLATE_IRON_ORE:
             case IRON_ORE: {
                 if (!block.getDrops(itemInHand, player).isEmpty()) {
 
@@ -78,6 +79,7 @@ public class Cutclean extends IGamemode implements Listener{
                 }
                 break;
             }
+            case DEEPSLATE_GOLD_ORE:
             case GOLD_ORE: {
                 if (!block.getDrops(itemInHand, player).isEmpty()) {
                     final int fortune = fortuneMultiplier(itemInHand);
@@ -87,6 +89,19 @@ public class Cutclean extends IGamemode implements Listener{
                     e.setExpToDrop(fortune);
 
                     dropCenter(new ItemStack(Material.GOLD_INGOT, (fortune+extras+extraGold)), block.getLocation());
+                }
+                break;
+            }
+            case DEEPSLATE_COPPER_ORE:
+            case COPPER_ORE: {
+                if (!block.getDrops(itemInHand, player).isEmpty()) {
+                    final int fortune = fortuneMultiplier(itemInHand);
+
+                    e.setDropItems(false);
+
+                    e.setExpToDrop(fortune);
+
+                    dropCenter(new ItemStack(Material.COPPER_INGOT, (fortune+extras+extraGold)), block.getLocation());
                 }
                 break;
             }
@@ -107,6 +122,7 @@ public class Cutclean extends IGamemode implements Listener{
                     dropCenter(new ItemStack(Material.GLASS, fortune), block.getLocation());
                 }
                 break;
+
             default:
                 break;
         }

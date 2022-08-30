@@ -53,13 +53,17 @@ public class TiempoBomba extends IGamemode implements Listener {
             var timeOfCreation = entry.getValue();
             var differential = (System.currentTimeMillis() - timeOfCreation) / 1000.0;
             if (differential >= 30) {
-                armorStand.remove();
+                if (armorStand != null){
+                    armorStand.setCustomNameVisible(false);
+                }
+                armorStand.setHealth(0);
                 // Maybe explode here?
                 Bukkit.getScheduler().runTask(instance, ()->{
                     entry.getKey().getLeft().setType(Material.AIR);
                     entry.getKey().getRight().setType(Material.AIR);
                     armorStand.getLocation().getWorld().createExplosion(armorStand.getLocation(), 6F);
                 });
+
                 iterator.remove();
             } else {
                 int second = (30 - (int) differential);
@@ -118,8 +122,7 @@ public class TiempoBomba extends IGamemode implements Listener {
             }
             var holoLoc = new Location(loc.getWorld(), loc.getBlockX() + 0.5, loc.getBlockY(), loc.getBlockZ());
             var holo = createHoloAt(holoLoc, ChatColor.of(colors.get(30-1)) + "30s");
-    
-            hologramChestMap.put(new TimeBombData(holo, loc.getBlock(), loc.clone().add(0, 0, -1).getBlock()), System.currentTimeMillis());
+            hologramChestMap.put(new TimeBombData(holo, loc.getBlock(), loc.clone().add(0, 0, -1).getBlock(), holo.getUniqueId()), System.currentTimeMillis());
 
         }, 1l);
     }

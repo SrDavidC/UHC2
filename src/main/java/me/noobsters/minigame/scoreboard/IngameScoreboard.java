@@ -38,8 +38,7 @@ public class IngameScoreboard extends IScoreboard {
                 "",
                 Game.getScoreColors() + "Players Left: " + ChatColor.WHITE + instance.getPlayerManager().getAlivePlayers(),
                 Game.getScoreColors() + "Border: " + ChatColor.WHITE + ((int) worldBorder.getSize() / 2), 
-                "",
-                ChatColor.WHITE + "noobsters.net");
+                "");
     }
 
     public void buildScoreboardSolo(Player player) {
@@ -53,8 +52,8 @@ public class IngameScoreboard extends IScoreboard {
                 "",
                 Game.getScoreColors() + "Players Left: " + ChatColor.WHITE + instance.getPlayerManager().getAlivePlayers(),
                 Game.getScoreColors() + "Border: " + ChatColor.WHITE + ((int) worldBorder.getSize() / 2), 
-                "",
-                ChatColor.WHITE + "noobsters.net");
+                "", "");
+
     }
 
     @Override

@@ -96,8 +96,7 @@ public class UHCVandalico extends IGamemode implements Listener {
                             + (team != null ? team.getTeamKills() : 0),
                     ChatColor.of("#00d0db") + "Players Left: " + ChatColor.WHITE
                             + instance.getPlayerManager().getAlivePlayers(),
-                    "--------------------------",
-                    ChatColor.of("#00d0db") + "Hosted by: " + ChatColor.WHITE + "noobsters.net",
+
                     "---------------------------");
 
         } else {
@@ -110,8 +109,6 @@ public class UHCVandalico extends IGamemode implements Listener {
                             + (uhcPlayer != null ? uhcPlayer.getKills() : 0),
                     ChatColor.of("#00d0db") + "Players Left: " + ChatColor.WHITE
                             + instance.getPlayerManager().getAlivePlayers(),
-                    "---------------------------",
-                    ChatColor.of("#00d0db") + "Hosted by: " + ChatColor.WHITE + "noobsters.net",
                     "---------------------------");
         }
 

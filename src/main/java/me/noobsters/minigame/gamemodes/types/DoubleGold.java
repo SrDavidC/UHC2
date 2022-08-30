@@ -45,7 +45,7 @@ public class DoubleGold extends IGamemode implements Listener{
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e){
-        if(e.getBlock().getType().equals(Material.GOLD_ORE)){
+        if(( e.getBlock().getType().equals(Material.GOLD_ORE) || e.getBlock().getType().equals(Material.DEEPSLATE_GOLD_ORE)  )){
             e.setCancelled(true);
             e.getPlayer().sendMessage(ChatColor.RED + "DoubleGold Scenario do not allow this.");
         }
@@ -56,10 +56,10 @@ public class DoubleGold extends IGamemode implements Listener{
 
         final var block = e.getBlock();
 
-    if (!instance.getGamemodeManager().isScenarioEnable(Cutclean.class) && 
-            block.getType().equals(Material.GOLD_ORE)) {
+    if (!instance.getGamemodeManager().isScenarioEnable(Cutclean.class) &&
+            ( block.getType().equals(Material.GOLD_ORE) ||block.getType().equals(Material.DEEPSLATE_GOLD_ORE)  )) {
         e.setDropItems(false);
-        dropCenter(new ItemStack(Material.GOLD_ORE, 2), block.getLocation());
+        dropCenter(new ItemStack(Material.RAW_GOLD, 2), block.getLocation());
 
     }
     }

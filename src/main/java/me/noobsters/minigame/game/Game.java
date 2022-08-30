@@ -28,17 +28,16 @@ public class Game {
     /* Static data */
     private static @Getter @Setter BossBar bossbar;
     private static Gson gson = new GsonBuilder().create();
-    private static @Getter @Setter String scoreboardTitle = ChatColor.AQUA + "" + ChatColor.BOLD + "UHC";
-    private static @Getter @Setter String tablistHeader = ChatColor.DARK_RED + "" + ChatColor.BOLD + "NOOBSTERS\n"
-            + ChatColor.of("#4788d9") + "\nJoin Our Community!\n" + ChatColor.of("#2be49c") + "discord.noobsters.net\n"
-            + ChatColor.AQUA + "twitter.com/NoobstersMC\n " + ChatColor.GOLD + "noobsters.buycraft.net\n";
-    private static @Getter @Setter String scoreColors = ChatColor.of("#0ca2d4") + "";
+    private static @Getter @Setter String scoreboardTitle = ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "UHC";
+    private static @Getter @Setter String tablistHeader = ChatColor.DARK_RED + "" + ChatColor.BOLD + "AWESOME BIG UHC\n"
+            + ChatColor.of("#f7c346") + "\nPowered by \n" + ChatColor.of("#1ea7f6") + "MariaSantana!\n\n";
+    private static @Getter @Setter String scoreColors = ChatColor.of("#847dff") + "";
     private static @Getter @Setter String UpToMVP = ChatColor.RED + "This action is only available for "
             + ChatColor.of("#1af4c1") + "MVP" + ChatColor.RED + " and UP! \n" + ChatColor.GREEN
-            + "Upgrade your rank at " + ChatColor.GOLD + "noobsters.buycraft.net";
+            + "Upgrade your rank at " + ChatColor.GOLD + "FREE";
     private static @Getter @Setter String UpToVIP = ChatColor.RED + "This action is only available for "
             + ChatColor.of("#f4c91a") + "VIP" + ChatColor.RED + " and UP! \n" + ChatColor.GREEN
-            + "Upgrade your rank at " + ChatColor.GOLD + "noobsters.buycraft.net";
+            + "Upgrade your rank at " + ChatColor.GOLD + "FREE";
     private static @Getter @Setter Location lobbySpawn;
 
     private static @Getter @Setter String COLOR_1 = ChatColor.of("#0eaa83") + "";
@@ -117,7 +116,7 @@ public class Game {
     int spectators;
     int playersOnline;
     String teamSize;
-    String hostname = "Noobsters";
+    String hostname = "Core";
     String ip = obtainPublicIP() + ":" + Bukkit.getServer().getPort();
 
     @Override

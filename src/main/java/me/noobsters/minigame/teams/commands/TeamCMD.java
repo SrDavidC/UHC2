@@ -291,7 +291,7 @@ public class TeamCMD extends BaseCommand {
         var bool = instance.getTeamManger().isFriendlyFire();
         instance.getTeamManger().setFriendlyFire(!bool);
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Friendly fire set to " + bool, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Friendly fire set to " + bool);
     }
 
     @Subcommand("chat|tc")
@@ -340,7 +340,7 @@ public class TeamCMD extends BaseCommand {
                 team.getOfflinePlayersStream().forEach(members -> {
                     var uhcMember = instance.getPlayerManager().getPlayer(members.getUniqueId());
                     var kills = uhcMember != null ? uhcMember.getKills() : 0;
-                    var message = ChatColor.GREEN + "%s" + ChatColor.WHITE + " %s" + ChatColor.DARK_RED + " EmojiHeart "
+                    var message = ChatColor.GREEN + "%s" + ChatColor.WHITE + " %s" + ChatColor.DARK_RED + " ❤ "
                             + ChatColor.GRAY + "kills: " + ChatColor.WHITE + "%d";
 
                     if (members.isOnline()) {
@@ -377,16 +377,16 @@ public class TeamCMD extends BaseCommand {
                 if (uhcp != null) {
                     if (uhcp.isDead()) {
                         sender.sendMessage((ChatColor.RED + "" + ChatColor.STRIKETHROUGH) + "" + target.getName()
-                                + ChatColor.WHITE + " " + (int) health + ChatColor.DARK_RED + " EmojiHeart " + ChatColor.GRAY
+                                + ChatColor.WHITE + " " + (int) health + ChatColor.DARK_RED + " ❤ " + ChatColor.GRAY
                                 + "kills: " + ChatColor.WHITE + p_kills);
                     } else {
                         sender.sendMessage(ChatColor.GREEN + "" + target.getName() + ChatColor.WHITE + " " + health
-                                + ChatColor.DARK_RED + " EmojiHeart " + ChatColor.GRAY + "kills: " + ChatColor.WHITE + p_kills);
+                                + ChatColor.DARK_RED + " ❤ " + ChatColor.GRAY + "kills: " + ChatColor.WHITE + p_kills);
                     }
 
                 } else {
                     sender.sendMessage((health > 0 ? ChatColor.GREEN : ChatColor.RED + "" + ChatColor.STRIKETHROUGH)
-                            + "" + target.getName() + ChatColor.WHITE + " " + health + ChatColor.DARK_RED + " EmojiHeart "
+                            + "" + target.getName() + ChatColor.WHITE + " " + health + ChatColor.DARK_RED + " ❤ "
                             + ChatColor.GRAY + "kills: " + ChatColor.WHITE + p_kills);
 
                 }
@@ -471,7 +471,7 @@ public class TeamCMD extends BaseCommand {
             instance.getTeamManger().setTeamManagement(bool);
         }
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Team management has been set to " + instance.getTeamManger().isTeamManagement(), permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Team management has been set to " + instance.getTeamManger().isTeamManagement());
 
     }
 
@@ -551,7 +551,9 @@ public class TeamCMD extends BaseCommand {
     public void teamSize(CommandSender sender, @Conditions("limits:min=1,max=100") Integer number) {
 
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Team size has been set from " + instance.getTeamManger().getTeamSize() + " to " + number, permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW
+                + "Team size has been set from " + instance.getTeamManger().getTeamSize()
+                + " to " + number);
         instance.getTeamManger().setTeamSize(number);
     }
 

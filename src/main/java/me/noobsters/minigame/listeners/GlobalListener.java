@@ -86,8 +86,8 @@ public class GlobalListener implements Listener {
         if (shooter == p)
             return;
 
-        shooter.sendMessage(ChatColor.GOLD + "EmojiBow " + p.getDisplayName() + ChatColor.GRAY + " is at " + ChatColor.WHITE
-                + (((int) (p.getHealth() - e.getFinalDamage())) / 2.0D) + ChatColor.DARK_RED + "EmojiHeart");
+        shooter.sendMessage(ChatColor.GOLD + "🏹 " + p.getDisplayName() + ChatColor.GRAY + " is at " + ChatColor.WHITE
+                + (((int) (p.getHealth() - e.getFinalDamage())) / 2.0D) + ChatColor.DARK_RED + "❤");
 
     }
 

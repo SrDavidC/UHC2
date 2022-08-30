@@ -89,20 +89,20 @@ public class UHCGuest extends IGamemode implements Listener {
                         var onlineMember = offlinePlayer.getPlayer();
                         if (onlineMember.getGameMode() != GameMode.SPECTATOR) {
                             list.add(ChatColor.GREEN + onlineMember.getName() + String.format(
-                                ChatColor.WHITE + " %.1f" + ChatColor.DARK_RED + "EmojiHeart",
+                                ChatColor.WHITE + " %.1f" + ChatColor.DARK_RED + "❤",
                                 (double) Math.round(
                                         (onlineMember.getHealth() + onlineMember.getAbsorptionAmount()) / 2.0D)));
 
                         } else {
-                            list.add(ChatColor.RED + "EmojiCross " + ChatColor.STRIKETHROUGH + onlineMember.getName() + "");
+                            list.add(ChatColor.RED + "❌ " + ChatColor.STRIKETHROUGH + onlineMember.getName() + "");
                         }
                     } else {
 
                         var uhcPlayer = instance.getPlayerManager().getPlayer(members);
                         if (uhcPlayer != null && !uhcPlayer.isAlive()) {
-                            list.add(ChatColor.RED + "Emoji " + ChatColor.STRIKETHROUGH + offlinePlayer.getName() + "");
+                            list.add(ChatColor.RED + "❌️ " + ChatColor.STRIKETHROUGH + offlinePlayer.getName() + "");
                         } else {
-                            list.add(ChatColor.GRAY + "EmojiTime " + offlinePlayer.getName() + "");
+                            list.add(ChatColor.GRAY + "⌛ " + offlinePlayer.getName() + "");
 
                         }
 
@@ -117,7 +117,6 @@ public class UHCGuest extends IGamemode implements Listener {
         list.add(ChatColor.of("#77cb10") + "Vivos: " + ChatColor.WHITE
                 + instance.getPlayerManager().getAlivePlayers());
         list.add("");
-        list.add(ChatColor.WHITE + "noobsters.net");
 
         e.setLines(list.toArray(new String[] {}));
     }

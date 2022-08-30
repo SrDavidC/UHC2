@@ -80,7 +80,7 @@ public class GoToHell extends IGamemode implements Listener {
             damage = !damage;
             if(damage == true){
                 var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-                Bukkit.broadcast(senderName + ChatColor.YELLOW + "Go To Hell Damage switch to: " + damage + " hearts.", permissionDebug);
+                Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Go To Hell Damage switch to: " + damage + " hearts.");
                 Bukkit.broadcastMessage(ChatColor.of("#cd4619")
                     + "Go to the Nether now. Player's that remain in the overworld will take "+ damageval + " hearts of damage every " + delay + " seconds.");
             }
@@ -91,7 +91,7 @@ public class GoToHell extends IGamemode implements Listener {
         public void delay(CommandSender sender, Integer newDelay) {
             delay = newDelay;
             var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-            Bukkit.broadcast(senderName + ChatColor.YELLOW + "GoToHell delay set to " + newDelay + " seconds.", permissionDebug);
+            Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "GoToHell delay set to " + newDelay + " seconds.");
 
         }
 
@@ -100,7 +100,7 @@ public class GoToHell extends IGamemode implements Listener {
         public void extradamage(CommandSender sender, Float damagevalue) {
             damageval = damagevalue;
             var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-            Bukkit.broadcast(senderName + ChatColor.YELLOW + "Go To Hell damage value set to " + damagevalue/2 + " hearts.", permissionDebug);
+            Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Go To Hell damage value set to " + damagevalue/2 + " hearts.");
 
         }
 

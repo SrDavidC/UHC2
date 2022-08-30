@@ -310,7 +310,7 @@ public class UHC extends JavaPlugin {
         try {
             Scoreboard mainScoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
             mainScoreboard.getObjectives().forEach(Objective::unregister);
-            Objective obj = mainScoreboard.registerNewObjective("health_name", "health", ChatColor.DARK_RED + "EmojiHeart");
+            Objective obj = mainScoreboard.registerNewObjective("health_name", "health", ChatColor.DARK_RED + "❤");
             obj.setDisplaySlot(DisplaySlot.BELOW_NAME);
             Objective obj2 = mainScoreboard.registerNewObjective("health_list", "health", " ", RenderType.INTEGER);
             obj2.setDisplaySlot(DisplaySlot.PLAYER_LIST);

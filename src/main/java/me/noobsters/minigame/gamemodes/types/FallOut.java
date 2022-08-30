@@ -77,7 +77,7 @@ public class FallOut extends IGamemode implements Listener {
             damage = !damage;
             if(damage == true){
                 var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-                Bukkit.broadcast(senderName + ChatColor.YELLOW + "FallOut Damage switch to: " + damage, permissionDebug);
+                Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "FallOut Damage switch to: " + damage);
                 Bukkit.broadcastMessage(ChatColor.of("#7aac2f") + "Go below coordinate Y=40 now. Player's that remain in surface will take a heart of damage every " + delay + " seconds.");
             }
 
@@ -88,7 +88,7 @@ public class FallOut extends IGamemode implements Listener {
         public void extraDamage(CommandSender sender, Float ed) {
             extradamage = ed;
             var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-            Bukkit.broadcast(senderName + ChatColor.YELLOW + "FallOut extra damage set to " + ed/2 + " hearts.", permissionDebug);
+            Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "FallOut extra damage set to " + ed/2 + " hearts.");
 
         }
 
@@ -97,7 +97,7 @@ public class FallOut extends IGamemode implements Listener {
         public void delay(CommandSender sender, Integer de) {
             delay = de;
             var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-            Bukkit.broadcast(senderName + ChatColor.YELLOW + "FallOut delay set to " + de + " seconds.", permissionDebug);
+            Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "FallOut delay set to " + de + " seconds.");
 
         }
     }

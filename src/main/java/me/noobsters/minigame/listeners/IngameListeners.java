@@ -171,7 +171,7 @@ public class IngameListeners implements Listener {
                     var holo = timebomb.createHoloAt(holoLoc, ChatColor.of(timebomb.getColors().get(30 - 1)) + "30s");
 
                     timebomb.getHologramChestMap().put(
-                            new TimeBombData(holo, loc.getBlock(), loc.clone().add(0, 0, -1).getBlock()),
+                            new TimeBombData(holo, loc.getBlock(), loc.clone().add(0, 0, -1).getBlock(), holo.getUniqueId()),
                             System.currentTimeMillis());
 
                 }, 1l);
@@ -375,7 +375,7 @@ public class IngameListeners implements Listener {
                             + instance.getPlayerManager().getAlivePlayers(),
                     Game.getScoreColors() + "Border: " + ChatColor.WHITE
                             + ((int) e.getScoreboard().getPlayer().getWorld().getWorldBorder().getSize() / 2),
-                    "", ChatColor.WHITE + "noobsters.net" });
+                    "" });
 
         } else {
             e.setLines(new String[] {
@@ -389,7 +389,7 @@ public class IngameListeners implements Listener {
                             + instance.getPlayerManager().getAlivePlayers(),
                     Game.getScoreColors() + "Border: " + ChatColor.WHITE
                             + ((int) e.getScoreboard().getPlayer().getWorld().getWorldBorder().getSize() / 2),
-                    "", ChatColor.WHITE + "noobsters.net" });
+                    "", });
         }
 
     }

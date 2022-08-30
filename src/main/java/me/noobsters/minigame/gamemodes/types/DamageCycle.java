@@ -141,7 +141,7 @@ public class DamageCycle extends IGamemode implements Listener {
 
             delay = newDelay*60;
             var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-            Bukkit.broadcast(senderName + ChatColor.YELLOW + "Damage Cycle delay has change to: " + newDelay + " minutes.", permissionDebug);
+            Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Damage Cycle delay has change to: " + newDelay + " minutes.");
         }
 
     }

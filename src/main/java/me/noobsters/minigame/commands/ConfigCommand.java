@@ -78,7 +78,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
             instance.getGame().setNether(!instance.getGame().isNether());
         }
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
-        Bukkit.broadcast(senderName + ChatColor.YELLOW + "Nether has been set to " + instance.getGame().isNether(), permissionDebug);
+        Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Nether has been set to " + instance.getGame().isNether());
         if (!instance.getGame().isNether()) {
             // Call Event
             Bukkit.getPluginManager().callEvent(new NetherDisabledEvent());
