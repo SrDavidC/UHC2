@@ -251,6 +251,10 @@ public class UHC extends JavaPlugin {
         /* Lobby stage has been reached */
         gameStage = Stage.LOBBY;
 
+        //Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scenarios toggle UHC Meetup");
+
+
+
     }
 
     @Override

@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import me.noobsters.minigame.UHC;
 import me.noobsters.minigame.gamemodes.types.*;
+import me.noobsters.minigame.gamemodes.types.guest.UHCGuest;
+import me.noobsters.minigame.gamemodes.types.guest.UHCLatam;
+import me.noobsters.minigame.gamemodes.types.guest.UHCVandalico;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -88,12 +91,12 @@ public class GamemodeManager {
         registerGamemode(new MetaGame(instance));
         
         // Invitados
-        //registerGamemode(new UHCVandalico(instance));
-        //registerGamemode(new UHCLatam(instance));
-        //registerGamemode(new UHCGuest(instance));
+        registerGamemode(new UHCVandalico(instance));
+        registerGamemode(new UHCLatam(instance));
+        registerGamemode(new UHCGuest(instance));
 
         // mode
-        //registerGamemode(new UHCMeetup(instance));
+         registerGamemode(new UHCMeetup(instance));
 
         instance.getCommandManager().getCommandCompletions().registerAsyncCompletion("scenarios",
                 c -> gamemodesList.stream().map(IGamemode::getName).collect(Collectors.toList()));

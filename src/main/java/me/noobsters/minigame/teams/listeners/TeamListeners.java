@@ -184,26 +184,11 @@ public class TeamListeners implements Listener {
 
     @EventHandler
     public void onCreateTeam(TeamCreatedEvent e) {
-//        Team noobstersTeam = e.getTeam();
-//        org.bukkit.scoreboard.@NotNull Team scoreboardTeam = instance.getTeamBoards().registerNewTeam(noobstersTeam.getTeamDisplayName());
-//        //scoreboardTeam.setPrefix(noobstersTeam.getTeamPrefix());
-//        //scoreboardTeam.setColor(randomColor());
-//        scoreboardTeam.color(NamedTextColor.RED);
-//        scoreboardTeam.prefix(Component.text("[TEST]"));
-//        scoreboardTeam.setAllowFriendlyFire(instance.getTeamManger().isFriendlyFire());
-//        scoreboardTeam.setCanSeeFriendlyInvisibles(true);
-//        System.out.println(instance.getTeamBoards().getTeams().size());
-      System.out.println("generated a scoreboard team");
-
-        //ScoreboardManager manager = Bukkit.getScoreboardManager();
-        //Scoreboard board = manager.getNewScoreboard();
         Scoreboard board = instance.getTeamBoards();
         org.bukkit.scoreboard.Team scoreboardTeam = board.registerNewTeam(e.getTeam().getTeamDisplayName());
         scoreboardTeam.setPrefix(org.bukkit.ChatColor.DARK_RED +  e.getTeam().getTeamPrefix());
         scoreboardTeam.setAllowFriendlyFire(instance.getTeamManger().isFriendlyFire());
         scoreboardTeam.setCanSeeFriendlyInvisibles(true);
-        scoreboardTeam.setCanSeeFriendlyInvisibles(true);
-        scoreboardTeam.setSuffix(org.bukkit.ChatColor.GOLD + "[SUFFIXES]");
         scoreboardTeam.setColor(randomColor());
         scoreboardTeam.addEntry(e.getPlayer().getName());
 

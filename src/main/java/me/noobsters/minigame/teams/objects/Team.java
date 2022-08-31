@@ -28,7 +28,7 @@ public class Team {
     private @Getter @Setter UUID[] members;
     private @Getter String teamDisplayName;
     private @Getter @Setter int teamKills;
-    private @Getter @Setter String teamPrefix = ">";
+    private @Getter @Setter String teamPrefix = "➤ ";
     private @Getter @Setter int teamColorIndex = 10;
     private @Getter Inventory teamInventory;
     private static int teamNumber = 1;
