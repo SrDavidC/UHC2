@@ -1,22 +1,22 @@
 package me.noobsters.minigame.gui.types;
-/*
+
+import fr.mrmicky.fastinv.ItemBuilder;
+import me.noobsters.minigame.UHC;
+import me.noobsters.minigame.gui.CustomGui;
+import me.noobsters.minigame.utils.RapidInv;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 
-import fr.mrmicky.fastinv.ItemBuilder;
-import me.noobsters.minigame.UHC;
-import me.noobsters.minigame.gui.CustomGui;
-import net.md_5.bungee.api.ChatColor;
-import net.noobsters.kern.paper.guis.RapidInv;
 
 public class EnabledScenarios extends CustomGui {
 
     UHC instance = UHC.getInstance();
     
     public EnabledScenarios(RapidInv gui) {
-        super(gui);
+        super(gui, GUIType.SCENARIOS);
 
         update();
 
@@ -55,4 +55,3 @@ public class EnabledScenarios extends CustomGui {
 
 }
 
- */

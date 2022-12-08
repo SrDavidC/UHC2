@@ -23,13 +23,13 @@ public class GamemodesCMD extends BaseCommand {
     @Default
     public void scenarios(CommandSender sender) {
         /* SCENARIOS ENABLED GUI */
-        //instance.getGuiManager().getMainGui().getEnabledScenariosGui().open((Player) sender);
+        instance.getGuiManager().getMainGui().getEnabledScenariosGui().open((Player) sender);
     }
 
     @Subcommand("all")
     public void allList(Player sender) {
 
-        //instance.getGuiManager().getMainGui().getScenarioPages().get(0).open(sender);
+        instance.getGuiManager().getMainGui().getScenarioPages().get(0).open(sender);
     }
 
 

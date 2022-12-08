@@ -1,16 +1,16 @@
 package me.noobsters.minigame.gui.types;
-/*
-import java.util.ArrayList;
-import java.util.List;
 
+import me.noobsters.minigame.UHC;
+import me.noobsters.minigame.gui.CustomGui;
+import me.noobsters.minigame.utils.RapidInv;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import me.noobsters.minigame.UHC;
-import me.noobsters.minigame.gui.CustomGui;
-import net.noobsters.kern.paper.guis.RapidInv;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class CustomCraftTable extends CustomGui {
 
@@ -18,7 +18,7 @@ public class CustomCraftTable extends CustomGui {
     List<ItemStack> items = new ArrayList<>();
 
     public CustomCraftTable(RapidInv gui, List<ItemStack> items) {
-        super(gui);
+        super(gui, GUIType.CRAFTS);
         this.items = items;
         update();
 
@@ -40,4 +40,3 @@ public class CustomCraftTable extends CustomGui {
         }
     }
 }
-*/

@@ -213,7 +213,6 @@ public class TeamListeners implements Listener {
         colors.add(org.bukkit.ChatColor.GRAY);
         colors.add(org.bukkit.ChatColor.DARK_GRAY);
 
-        System.out.println("generated a color");
         return colors.get(random.nextInt(colors.size()));
     }
 

@@ -24,7 +24,11 @@ repositories {
     maven { url 'https://plugins.gradle.org/m2' }
     maven { url 'https://jitpack.io' }
     maven { url 'https://repo.aikar.co/content/groups/aikar/' }
-    maven { url 'https://repo.citizensnpcs.co/'}
+    maven {
+        name = 'citizens-repo'
+        url = 'https://maven.citizensnpcs.co/repo'
+    }
+
 
 
 }
@@ -60,7 +64,10 @@ dependencies {
     compileOnly 'io.papermc:paperlib:1.0.4'
 
     //Citizens
-    compileOnly 'net.citizensnpcs:citizens-main:2.0.27-SNAPSHOT'
+    // compileOnly 'net.citizensnpcs:citizens-main:2.0.30-SNAPSHOT'
+    compileOnly('net.citizensnpcs:citizens-main:2.0.30-SNAPSHOT') {
+        exclude group: '*', module: '*'
+    }
 
 
 }

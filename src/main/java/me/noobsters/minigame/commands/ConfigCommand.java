@@ -6,14 +6,12 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import me.noobsters.minigame.UHC;
 import me.noobsters.minigame.events.NetherDisabledEvent;
-import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.Team;
 
 import java.text.DecimalFormat;
 
@@ -30,8 +28,8 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
 
     @Default
     public void configCMD(CommandSender sender) {
-        //var gui = instance.getGuiManager().getMainGui();
-       // gui.open((Player) sender);
+        var gui = instance.getGuiManager().getMainGui();
+        gui.open((Player) sender);
 
         var color = ChatColor.of("#5EA95F");
         var color2 = ChatColor.of("#776FC4");
@@ -50,7 +48,7 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
                     + "m\n" + color4 + "---------------------------------\n");
 
         } else {
-            sender.sendMessage(color4 + "---------------------------------\n" + color3 + "        Noobsters\n" + color4
+            sender.sendMessage(color4 + "---------------------------------\n" + color3 + "        UHC\n" + color4
                     + "---------------------------------\n" + color + "Config: " + ChatColor.WHITE + "UHC "
                     + getGameType() + "\n" + color + "Scenarios: " + ChatColor.WHITE
                     + instance.getGamemodeManager().getEnabledGamemodesToString() + "\n" + color2 + "PvP Enabled: "
@@ -331,21 +329,11 @@ public @RequiredArgsConstructor class ConfigCommand extends BaseCommand {
         var senderName = ChatColor.GRAY + "[" + sender.getName().toString() + "] ";
         Bukkit.broadcastMessage(senderName + ChatColor.YELLOW + "Trades has been set to: " + bool);
     }
+    @CommandPermission("uhc.config.cmd")
+    @Subcommand("destroy")
+    @CommandAlias("destroy")
+    public void changeTrades(CommandSender sender) {
+        instance.getGame().sendSelfDestroyRequest();
+    }
 
-    @CommandPermission("uhc.config.cmd")
-    @Subcommand("tiempillo")
-    @CommandAlias("tiempillo")
-    public void tiempillo(CommandSender sender) {
-        Bukkit.getServer().broadcast(Component.text("GameTime: " + instance.getGame().getGameTime()
-        + "//\nGameStart:  " + instance.getGame().getStartTime()));
-    }
-    @CommandPermission("uhc.config.cmd")
-    @Subcommand("teamcillos")
-    @CommandAlias("teamcillos")
-    public void teamcillos(CommandSender sender) {
-        System.out.println(instance.getTeamBoards().getTeams().size());
-        for (Team iterator: instance.getTeamBoards().getTeams()) {
-            System.out.println("Entry: " + iterator.getName());
-        }
-    }
 }

@@ -5,7 +5,6 @@ import co.aikar.taskchain.BukkitTaskChainFactory;
 import co.aikar.taskchain.TaskChain;
 import co.aikar.taskchain.TaskChainFactory;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import fr.mrmicky.fastinv.FastInvManager;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,11 +17,14 @@ import me.noobsters.minigame.enums.Stage;
 import me.noobsters.minigame.game.Game;
 import me.noobsters.minigame.gamemodes.GamemodeManager;
 import me.noobsters.minigame.gamemodes.GamemodesCMD;
+import me.noobsters.minigame.gui.GuiManager;
 import me.noobsters.minigame.listeners.ListenerManager;
 import me.noobsters.minigame.players.PlayerManager;
 import me.noobsters.minigame.portals.PortalListeners;
 import me.noobsters.minigame.scoreboard.ScoreboardManager;
 import me.noobsters.minigame.teams.TeamManager;
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.event.DespawnReason;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
@@ -59,11 +61,11 @@ public class UHC extends JavaPlugin {
     private @Getter ChunksManager chunkManager;
     private @Getter GamemodeManager gamemodeManager;
     private @Getter ChatManager chatManager;
-    //private @Getter GuiManager guiManager;
+    private @Getter GuiManager guiManager;
     private @Getter @Setter Game game;
     private @Getter BorderManager borderManager;
     //private @Getter CondorManager condorManager;
-    private @Getter JsonObject condorConfig;
+    //private @Getter JsonObject condorConfig;
     private @Getter PortalListeners portalListeners;
     /* Statics */
     private static @Getter UHC instance;
@@ -146,6 +148,11 @@ public class UHC extends JavaPlugin {
     }
 
     /* Condor Pre Boot-up code ends */
+
+    @Override
+    public void onLoad() {
+       // sendSelfDestroyRequest();
+    }
 
     @Override
     public void onEnable() {
@@ -236,7 +243,7 @@ public class UHC extends JavaPlugin {
 
         teamBoards = SCmanager.getNewScoreboard();
 
-        //guiManager = new GuiManager(this);
+        guiManager = new GuiManager(this);
 
         portalListeners = new PortalListeners(this);
         /* Install the config */
@@ -246,13 +253,10 @@ public class UHC extends JavaPlugin {
         runStartUp();
 
         /* In case the server is already running and it is a reload */
-        //Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldload");
+         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldload");
 
         /* Lobby stage has been reached */
         gameStage = Stage.LOBBY;
-
-        //Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scenarios toggle UHC Meetup");
-
 
 
     }
@@ -272,6 +276,8 @@ public class UHC extends JavaPlugin {
         // gamemodeManager.getEnabledGamemodes().forEach(IGamemode::disableScenario);
         // commandManager.unregisterCommands();
         craftingManager.purgeRecipes();
+        CitizensAPI.getNPCRegistry().despawnNPCs(DespawnReason.REMOVAL);
+         sendSelfDestroyRequest();
     }
 
     public void restartSystem() {
@@ -407,4 +413,44 @@ public class UHC extends JavaPlugin {
     public void onJoins(PlayerJoinEvent e){
         e.getPlayer().setScoreboard(teamBoards);
     }
+
+    void deleteDir(File file) {
+        File[] contents = file.listFiles();
+        if (contents != null) {
+            for (File f : contents) {
+                deleteDir(f);
+            }
+        }
+        file.delete();
+    }
+
+    public void sendSelfDestroyRequest() {
+       restartSystem();
+        /*
+        String overworldPath = ".\\world\\";
+        String netherPath ="./world_nether/";
+        String endPath = "./world_the_end/";
+        Bukkit.unloadWorld("world", false);
+        Bukkit.unloadWorld("world_nether", true);
+        Bukkit.unloadWorld("world_the_end", true);
+
+        File worldDir = new File(overworldPath);
+        File worldRename = new File("renamingWorld");
+        File netherdDir = new File(netherPath);
+        File endDir = new File(endPath);
+        if(endDir.exists())
+            deleteDir(endDir);
+        if(worldDir.exists()){
+            worldDir.renameTo(worldRename);
+        } else {
+            System.out.println("not delete");
+        }
+
+        if (netherdDir.exists())
+            deleteDir(netherdDir);
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
+        */
+
+    }
+
 }

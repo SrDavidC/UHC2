@@ -1,15 +1,19 @@
 package me.noobsters.minigame.gui;
-/*
-import org.bukkit.entity.Player;
 
 import lombok.Getter;
-import net.noobsters.kern.paper.guis.RapidInv;
+import me.noobsters.minigame.utils.RapidInv;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 
-public abstract class CustomGui {
-    @Getter RapidInv gui;
 
-    public CustomGui(RapidInv gui){
+public abstract class CustomGui implements Listener {
+    @Getter
+    RapidInv gui;
+    GUIType guiType;
+
+    public CustomGui(RapidInv gui, GUIType guiType){
         this.gui = gui;
+        this.guiType = guiType;
     }
 
     public RapidInv getRapidInv() {
@@ -24,7 +28,16 @@ public abstract class CustomGui {
     }
 
     public abstract void update();
-    
+
+    public enum GUIType {
+        MAIN,
+        CONFIG,
+        CONFIRMATION,
+        CUSTOMCRAFT,
+        CRAFTS,
+        GAMELOOP,
+        SWITCH,
+        SCENARIOS
+    }
 }
 
- */

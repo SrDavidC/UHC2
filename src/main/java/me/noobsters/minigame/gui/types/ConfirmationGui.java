@@ -1,22 +1,22 @@
 package me.noobsters.minigame.gui.types;
-/*
-import java.util.function.Consumer;
-
-import org.bukkit.Material;
-import org.bukkit.event.inventory.InventoryClickEvent;
 
 import fr.mrmicky.fastinv.ItemBuilder;
 import lombok.Getter;
 import me.noobsters.minigame.gui.CustomGui;
+import me.noobsters.minigame.utils.RapidInv;
 import net.md_5.bungee.api.ChatColor;
-import net.noobsters.kern.paper.guis.RapidInv;
+import org.bukkit.Material;
+import org.bukkit.event.inventory.InventoryClickEvent;
+
+import java.util.function.Consumer;
+
 
 public class ConfirmationGui extends CustomGui {
     private @Getter Consumer<InventoryClickEvent> confirm;
     private @Getter Consumer<InventoryClickEvent> deny;
 
     public ConfirmationGui(RapidInv gui, Consumer<InventoryClickEvent> confirm, Consumer<InventoryClickEvent> deny) {
-        super(gui);
+        super(gui, GUIType.CONFIRMATION);
         this.confirm = confirm;
         this.deny = deny;
 
@@ -33,4 +33,3 @@ public class ConfirmationGui extends CustomGui {
 }
 
 
- */

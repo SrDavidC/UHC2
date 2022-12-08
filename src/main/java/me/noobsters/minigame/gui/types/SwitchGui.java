@@ -1,7 +1,11 @@
 package me.noobsters.minigame.gui.types;
-/*
-import java.text.DecimalFormat;
 
+import fr.mrmicky.fastinv.ItemBuilder;
+import lombok.Getter;
+import lombok.Setter;
+import me.noobsters.minigame.gui.CustomGui;
+import me.noobsters.minigame.utils.RapidInv;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -10,12 +14,8 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.PotionMeta;
 
-import fr.mrmicky.fastinv.ItemBuilder;
-import lombok.Getter;
-import lombok.Setter;
-import me.noobsters.minigame.gui.CustomGui;
-import net.md_5.bungee.api.ChatColor;
-import net.noobsters.kern.paper.guis.RapidInv;
+import java.text.DecimalFormat;
+
 
 public class SwitchGui extends CustomGui {
 
@@ -27,7 +27,7 @@ public class SwitchGui extends CustomGui {
     String permissionConfig = "uhc.config.cmd";
 
     public SwitchGui(RapidInv gui, float incrementer) {
-        super(gui);
+        super(gui, GUIType.SWITCH);
 
         this.incrementer = incrementer;
         update();
@@ -101,4 +101,3 @@ public class SwitchGui extends CustomGui {
 }
 
 
- */

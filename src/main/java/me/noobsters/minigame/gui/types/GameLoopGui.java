@@ -1,5 +1,10 @@
 package me.noobsters.minigame.gui.types;
-/*
+
+import fr.mrmicky.fastinv.ItemBuilder;
+import me.noobsters.minigame.UHC;
+import me.noobsters.minigame.gui.CustomGui;
+import me.noobsters.minigame.utils.RapidInv;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -11,11 +16,6 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 
-import fr.mrmicky.fastinv.ItemBuilder;
-import me.noobsters.minigame.UHC;
-import me.noobsters.minigame.gui.CustomGui;
-import net.md_5.bungee.api.ChatColor;
-import net.noobsters.kern.paper.guis.RapidInv;
 
 public class GameLoopGui extends CustomGui {
 
@@ -28,8 +28,9 @@ public class GameLoopGui extends CustomGui {
     SwitchGui borderSizeSwitch = new SwitchGui(new RapidInv(InventoryType.HOPPER, "Border size"), 100);
     SwitchGui borderCenterTimeSwitch = new SwitchGui(new RapidInv(InventoryType.HOPPER, "Border to center time"), 1);
 
+
     public GameLoopGui(RapidInv gui) {
-        super(gui);
+        super(gui, GUIType.GAMELOOP);
 
         pvpSwitch.setUpLimit(60);
         var sword = new ItemBuilder(Material.IRON_SWORD).name(ChatColor.YELLOW + "PvP time")
@@ -113,6 +114,7 @@ public class GameLoopGui extends CustomGui {
             var player = (Player) action.getWhoClicked();
             instance.getGuiManager().getMainGui().open((Player) action.getWhoClicked());
             player.playSound(player.getLocation(), Sound.ITEM_ARMOR_EQUIP_TURTLE, SoundCategory.VOICE, 1.0f, 1.0f);
+            System.out.println("executed");
         });
 
         update();
@@ -212,7 +214,5 @@ public class GameLoopGui extends CustomGui {
             }
         });
     }
-
 }
 
- */

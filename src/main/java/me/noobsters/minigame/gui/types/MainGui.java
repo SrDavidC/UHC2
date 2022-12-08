@@ -1,21 +1,4 @@
 package me.noobsters.minigame.gui.types;
-/*
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.meta.PotionMeta;
 
 import fr.mrmicky.fastinv.ItemBuilder;
 import lombok.Getter;
@@ -23,8 +6,21 @@ import lombok.Setter;
 import me.noobsters.minigame.UHC;
 import me.noobsters.minigame.game.Game.GameInfo;
 import me.noobsters.minigame.gui.CustomGui;
+import me.noobsters.minigame.utils.RapidInv;
 import net.md_5.bungee.api.ChatColor;
-import net.noobsters.kern.paper.guis.RapidInv;
+import org.bukkit.*;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.meta.PotionMeta;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class MainGui extends CustomGui {
 
@@ -32,18 +28,17 @@ public class MainGui extends CustomGui {
 
     private @Getter @Setter EnabledScenarios enabledScenariosGui = new EnabledScenarios(
             new RapidInv(9 * 2, "Scenarios"));
-    private @Getter @Setter EnabledCrafting enabledCraftingGui = new EnabledCrafting(new RapidInv(9 * 2, "Crafting"));
+    private @Getter @Setter EnabledCrafting enabledCraftingGui = new EnabledCrafting(new RapidInv(9 * 2, "Custom Crafting"));
     private @Getter @Setter ConfigGui configGui = new ConfigGui(new RapidInv(9 * 2, "Settings"));
     private @Getter @Setter GameLoopGui gameLoopGui = new GameLoopGui(new RapidInv(9 * 2, "Game Loop"));
     private @Getter @Setter List<RapidInv> scenarioPages = new ArrayList<>();
-    private @Getter @Setter RapidInv toggleCraftingGui = new RapidInv(9 * 2, "Crafting");
+    private @Getter @Setter RapidInv toggleCraftingGui = new RapidInv(9 * 2, "Custom Crafting");
     String permissionConfig = "uhc.config.cmd";
     String color1 = "" + ChatColor.of("#eb9c4c");
     DecimalFormat numberFormat = new DecimalFormat("#0.0");
 
     public MainGui(RapidInv gui) {
-        super(gui);
-
+        super(gui, GUIType.MAIN);
         //scenario toggle gui
         var listCount = instance.getGamemodeManager().getGamemodesList().size();
 
@@ -111,7 +106,7 @@ public class MainGui extends CustomGui {
         updateGame();
         updateSettings();
         updateInfo();
-        updateScenarioPages();
+        updateScenarioPages(null);
         updateToggleCraftingGui();
     }
 
@@ -136,7 +131,7 @@ public class MainGui extends CustomGui {
         
     }
 
-    public void updateScenarioPages() {
+    public void updateScenarioPages(Player player) {
 
         var igamemodes = instance.getGamemodeManager().getGamemodesList().stream().collect(Collectors.toList());
         var gm = 0;
@@ -146,7 +141,7 @@ public class MainGui extends CustomGui {
             for (int slot = 0; slot < 52; slot++) {
 
                 if(gm >= igamemodes.size()) return;
-
+                // get gamemodes by index
                 var gamemode = igamemodes.get(gm);
                 
                 var icon = gamemode.getAsIcon();
@@ -155,13 +150,12 @@ public class MainGui extends CustomGui {
 
                 icon.addLore(gamemode.isEnabled() ? ChatColor.GREEN + "Enabled" : ChatColor.RED + "Disabled");
                 
-                page.setItem(slot, icon.build(), action -> {
-                    var player = (Player) action.getWhoClicked();
+                page.setItem(slot, icon.build());
+                if(player != null) {
                     Bukkit.dispatchCommand(player, "scenario toggle " + gamemode.getName());
-                    
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_GUITAR, SoundCategory.VOICE, 1.0f,
                             0.1f);
-                });
+                }
                 gm++;
             }
         }
@@ -312,4 +306,3 @@ public class MainGui extends CustomGui {
 }
 
 
- */

@@ -1,10 +1,10 @@
 package me.noobsters.minigame.gui.types;
-/*
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
+import fr.mrmicky.fastinv.ItemBuilder;
+import me.noobsters.minigame.UHC;
+import me.noobsters.minigame.gui.CustomGui;
+import me.noobsters.minigame.utils.RapidInv;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -15,11 +15,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 
-import fr.mrmicky.fastinv.ItemBuilder;
-import me.noobsters.minigame.UHC;
-import me.noobsters.minigame.gui.CustomGui;
-import net.md_5.bungee.api.ChatColor;
-import net.noobsters.kern.paper.guis.RapidInv;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class EnabledCrafting extends CustomGui {
 
@@ -28,7 +27,7 @@ public class EnabledCrafting extends CustomGui {
     String permissionConfig = "uhc.config.cmd";
 
     public EnabledCrafting(RapidInv gui) {
-        super(gui);
+        super(gui, GUIType.CUSTOMCRAFT);
 
         var crafts = UHC.getInstance().getCraftingManager().getAllRecipes().entrySet().stream().collect(Collectors.toList());
 
@@ -118,4 +117,3 @@ public class EnabledCrafting extends CustomGui {
 
 }
 
- */

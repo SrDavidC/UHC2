@@ -28,7 +28,7 @@ public class GamemodeManager {
         this.instance = instance;
         // Scenarios
         registerGamemode(new Cutclean(instance));
-        //registerGamemode(new EnderRespawn(instance));
+        registerGamemode(new EnderRespawn(instance));
         // registerGamemode(new Moles(instance));
         registerGamemode(new GoToHell(instance));
         registerGamemode(new BowLess(instance));
@@ -55,13 +55,13 @@ public class GamemodeManager {
         registerGamemode(new FlorPoderosa(instance));
         registerGamemode(new TiempoBomba(instance));
         registerGamemode(new NoClean(instance));
-        //registerGamemode(new FastLeaves());
+        registerGamemode(new FastLeaves());
         registerGamemode(new NineSlots(instance));
         registerGamemode(new DoubleGold(instance));
         registerGamemode(new ThunderKill(instance));
         registerGamemode(new XPHunter(instance));
         registerGamemode(new FastSmelting(instance));
-        //registerGamemode(new MonstersInc(instance));
+        registerGamemode(new MonstersInc(instance));
         registerGamemode(new PermaGlow(instance));
         registerGamemode(new BloodExperience(instance));
         registerGamemode(new HasteyBoysPlus(instance));
@@ -235,6 +235,13 @@ public class GamemodeManager {
         }
 
         return componentBuilder.create();
+    }
+
+    public IGamemode getScenarioFromName(String name) {
+        for (var scenario : instance.getGamemodeManager().getGamemodesList())
+            if (scenario.getName().equalsIgnoreCase(name))
+                return scenario;
+        return null;
     }
 
 }

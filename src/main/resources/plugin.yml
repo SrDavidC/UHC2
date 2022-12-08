@@ -4,6 +4,6 @@ version: ${version}
 description: "Redundant and optimized UHC minigame plugin."
 api-version: "1.16"
 api: "1.16"
-authors: [InfinityZ, AleIV]
+authors: [Fulanito, Fulanita]
 softdepend: [Kern, Chunky, Vault, Citizens]
 load: POSTWORLD

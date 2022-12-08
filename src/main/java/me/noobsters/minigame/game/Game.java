@@ -18,6 +18,7 @@ import org.bukkit.Location;
 import org.bukkit.boss.BossBar;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashMap;
@@ -137,10 +138,24 @@ public class Game {
         return gson.toJson(this);
     }
 
+    void deleteDir(File file) {
+        File[] contents = file.listFiles();
+        if (contents != null) {
+            for (File f : contents) {
+                deleteDir(f);
+            }
+        }
+        file.delete();
+    }
+
+    public void sendSelfDestroyRequest() {
+
+    }
+/*
     public void sendSelfDestroyRequest(UHC instance) {
         //if (instance.getGamemodeManager().isScenarioEnable(UHCMeetup.class)) {
-            Bukkit.getScheduler().runTask(instance, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop"));
-            return;
+            //Bukkit.getScheduler().runTask(instance, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop"));
+            //return;
         //}
         /*
         try {
@@ -160,8 +175,9 @@ public class Game {
             // TODO: handle exception
         }
 
-         */
-    }
+
+  }
+      */
 
 
 
@@ -185,7 +201,7 @@ public class Game {
             for (var p : Bukkit.getOnlinePlayers()) {
                 scheduler.runTaskLater(instance, () -> p.kickPlayer("Thanks for playing."), count += 5);
             }
-            scheduler.runTaskLater(instance, () -> sendSelfDestroyRequest(instance), count += 5);
+            scheduler.runTaskLater(instance, () -> sendSelfDestroyRequest(), count += 5);
 
         }, 20 * delay);
 
